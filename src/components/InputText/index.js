@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class InputText extends Component {
     render() {
-        return (<input autoFocus type="text" placeholder="Type here" value={this.props.inputText} onChange={this.props.handleInput} />)
+        return (<textarea style={{width:'90vw'}} autoFocus type="text" placeholder="Type here" value={this.props.inputText} onChange={this.props.handleInput} />)
     }
 }
 
