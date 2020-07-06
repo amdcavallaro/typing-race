@@ -68,8 +68,9 @@ class MatchTexts extends Component {
                     <InputText handleInput={this.handleInput} />
                 </p>
                 {
-                    this.isFinished() && <p>HURRAY 🥳</p>
+                    this.isFinished() && <p >HURRAY <span aria-label="image" role="img">🥳</span></p>
                 }
+
             </div>
         );
     }
