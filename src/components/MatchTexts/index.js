@@ -2,20 +2,34 @@ import React, { Component } from 'react';
 import InputText from '../InputText/index';
 import ExpectedText from '../ExpectedText/index';
 import TextSamples from '../../TextSamples.json';
+import Timer from '../Timer/index';
 
 class MatchTexts extends Component {
     constructor(props) {
         super(props);
         this.state = {
             inputText: '',
-            expectedText: TextSamples[Math.floor(Math.random()*TextSamples.length)]
+            expectedText: TextSamples[Math.floor(Math.random()*TextSamples.length)],
+            startTime: null, // when user started typing
+            endTime: null, // when user finished typing
         };
     }
 
     handleInput = (event) => {
+        let newText = event.target.value;
         this.setState({
-            inputText: event.target.value,
+            inputText: newText,
         });
+
+        // if timer not started yet, start it now
+        if (this.state.startTime === null) {
+            this.setState({startTime: new Date()})
+        }
+
+        // if user finished, record endTime
+        if (newText === this.state.expectedText) {
+            this.setState({endTime: new Date()})
+        }
     };
 
     calculateNumberOfCorrectCharacters = () => {
@@ -42,6 +56,7 @@ class MatchTexts extends Component {
     render() {
         return (
             <div>
+                <Timer startTime={this.state.startTime} endTime={this.state.endTime} />
                 <p id="expectedText">
                     <ExpectedText
                         expectedText={this.state.expectedText}
